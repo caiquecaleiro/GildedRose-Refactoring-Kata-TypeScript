@@ -209,4 +209,44 @@ describe("Gilded Rose", () => {
 			});
 		});
 	});
+
+	describe("Legendary items", () => {
+		it("should not decrease sell in or quality", () => {
+			const legendaryItem = new Item("Sulfuras, Hand of Ragnaros", 0, 80);
+			const gildedRose = new GildedRose([legendaryItem]);
+
+			gildedRose.updateQuality();
+
+			const [updatedLegendaryItem] = gildedRose.items;
+
+			expect(updatedLegendaryItem.sellIn).toBe(0);
+			expect(updatedLegendaryItem.quality).toBe(80);
+		});
+	});
+
+	describe("Conjured Items", () => {
+		describe("should decrease quality", () => {
+			it("by 2 when getting older with positive sell in days", () => {
+				const conjuredItem = new Item("Conjured Mana Cake", 10, 10);
+				const gildedRose = new GildedRose([conjuredItem]);
+
+				gildedRose.updateQuality();
+
+				const [updatedConjuredItem] = gildedRose.items;
+
+				expect(updatedConjuredItem.quality).toBe(8);
+			});
+
+			it("by 4 when sell in has passed", () => {
+				const conjuredItem = new Item("Conjured Mana Cake", 0, 10);
+				const gildedRose = new GildedRose([conjuredItem]);
+
+				gildedRose.updateQuality();
+
+				const [updatedConjuredItem] = gildedRose.items;
+
+				expect(updatedConjuredItem.quality).toBe(6);
+			});
+		});
+	});
 });
