@@ -100,7 +100,7 @@ for (let i = 0; i < days; i++) {
 // Elixir of the Mongoose 0 2
 // Sulfuras, Hand of Ragnaros 0 80
 // Sulfuras, Hand of Ragnaros -1 80
-// Backstage passes to a TAFKAL80ETC concert 10 25
+// Backstage passes to a TAFKAL80ETC concert 10 26
 // Backstage passes to a TAFKAL80ETC concert 5 50
 // Backstage passes to a TAFKAL80ETC concert 0 50
 // Conjured Mana Cake -2 0
@@ -112,7 +112,7 @@ for (let i = 0; i < days; i++) {
 // Elixir of the Mongoose -1 0
 // Sulfuras, Hand of Ragnaros 0 80
 // Sulfuras, Hand of Ragnaros -1 80
-// Backstage passes to a TAFKAL80ETC concert 9 27
+// Backstage passes to a TAFKAL80ETC concert 9 28
 // Backstage passes to a TAFKAL80ETC concert 4 50
 // Backstage passes to a TAFKAL80ETC concert -1 0
 // Conjured Mana Cake -3 0
@@ -124,7 +124,7 @@ for (let i = 0; i < days; i++) {
 // Elixir of the Mongoose -2 0
 // Sulfuras, Hand of Ragnaros 0 80
 // Sulfuras, Hand of Ragnaros -1 80
-// Backstage passes to a TAFKAL80ETC concert 8 29
+// Backstage passes to a TAFKAL80ETC concert 8 30
 // Backstage passes to a TAFKAL80ETC concert 3 50
 // Backstage passes to a TAFKAL80ETC concert -2 0
 // Conjured Mana Cake -4 0
@@ -136,7 +136,7 @@ for (let i = 0; i < days; i++) {
 // Elixir of the Mongoose -3 0
 // Sulfuras, Hand of Ragnaros 0 80
 // Sulfuras, Hand of Ragnaros -1 80
-// Backstage passes to a TAFKAL80ETC concert 7 31
+// Backstage passes to a TAFKAL80ETC concert 7 32
 // Backstage passes to a TAFKAL80ETC concert 2 50
 // Backstage passes to a TAFKAL80ETC concert -3 0
 // Conjured Mana Cake -5 0
@@ -148,7 +148,7 @@ for (let i = 0; i < days; i++) {
 // Elixir of the Mongoose -4 0
 // Sulfuras, Hand of Ragnaros 0 80
 // Sulfuras, Hand of Ragnaros -1 80
-// Backstage passes to a TAFKAL80ETC concert 6 33
+// Backstage passes to a TAFKAL80ETC concert 6 34
 // Backstage passes to a TAFKAL80ETC concert 1 50
 // Backstage passes to a TAFKAL80ETC concert -4 0
 // Conjured Mana Cake -6 0
@@ -160,7 +160,7 @@ for (let i = 0; i < days; i++) {
 // Elixir of the Mongoose -5 0
 // Sulfuras, Hand of Ragnaros 0 80
 // Sulfuras, Hand of Ragnaros -1 80
-// Backstage passes to a TAFKAL80ETC concert 5 35
+// Backstage passes to a TAFKAL80ETC concert 5 37
 // Backstage passes to a TAFKAL80ETC concert 0 50
 // Backstage passes to a TAFKAL80ETC concert -5 0
 // Conjured Mana Cake -7 0
@@ -172,7 +172,7 @@ for (let i = 0; i < days; i++) {
 // Elixir of the Mongoose -6 0
 // Sulfuras, Hand of Ragnaros 0 80
 // Sulfuras, Hand of Ragnaros -1 80
-// Backstage passes to a TAFKAL80ETC concert 4 38
+// Backstage passes to a TAFKAL80ETC concert 4 40
 // Backstage passes to a TAFKAL80ETC concert -1 0
 // Backstage passes to a TAFKAL80ETC concert -6 0
 // Conjured Mana Cake -8 0
