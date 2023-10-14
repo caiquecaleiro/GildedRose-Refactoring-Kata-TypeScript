@@ -102,7 +102,7 @@ describe("Gilded Rose", () => {
 			it("up to the limit of 50", () => {
 				const backstagePasses = new Item(
 					"Backstage passes to a TAFKAL80ETC concert",
-					2,
+					1,
 					50
 				);
 				const gildedRose = new GildedRose([backstagePasses]);
@@ -146,6 +146,66 @@ describe("Gilded Rose", () => {
 				const [updatedBackagePasses] = gildedRose.items;
 
 				expect(updatedBackagePasses.sellIn).toBe(1);
+			});
+		});
+	});
+
+	describe("Normal items", () => {
+		describe("should decrease quality", () => {
+			it("by 1 when getting older with positive sell in days", () => {
+				const normalItem = new Item("Spike Sword", 3, 5);
+				const gildedRose = new GildedRose([normalItem]);
+
+				gildedRose.updateQuality();
+
+				const [updatedNormalItem] = gildedRose.items;
+				expect(updatedNormalItem.quality).toBe(4);
+			});
+
+			it("by 2 when sell in has passed", () => {
+				const normalItem = new Item("Mastermind Shield", 0, 3);
+				const gildedRose = new GildedRose([normalItem]);
+
+				gildedRose.updateQuality();
+
+				const [updatedNormalItem] = gildedRose.items;
+
+				expect(updatedNormalItem.quality).toBe(1);
+			});
+
+			it("by 0 when quality reaches 0", () => {
+				const normalItem = new Item("Obsidian Knife", 0, 0);
+				const gildedRose = new GildedRose([normalItem]);
+
+				gildedRose.updateQuality();
+
+				const [updatedNormalItem] = gildedRose.items;
+
+				expect(updatedNormalItem.quality).toBe(0);
+			});
+		});
+
+		describe("should decrease sell in", () => {
+			it("by 1 when getting older", () => {
+				const normalItem = new Item("Royal Helmet", 2, 0);
+				const gildedRose = new GildedRose([normalItem]);
+
+				gildedRose.updateQuality();
+
+				const [updatedNormalItem] = gildedRose.items;
+
+				expect(updatedNormalItem.sellIn).toBe(1);
+			});
+
+			it("by 1 when sell in has already passed", () => {
+				const normalItem = new Item("Golden Armor", 0, 0);
+				const gildedRose = new GildedRose([normalItem]);
+
+				gildedRose.updateQuality();
+
+				const [updatedNormalItem] = gildedRose.items;
+
+				expect(updatedNormalItem.sellIn).toBe(-1);
 			});
 		});
 	});
