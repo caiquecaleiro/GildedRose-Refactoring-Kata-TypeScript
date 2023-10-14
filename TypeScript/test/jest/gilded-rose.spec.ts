@@ -51,4 +51,102 @@ describe("Gilded Rose", () => {
 			});
 		});
 	});
+
+	describe("Backstage passes", () => {
+		describe("should increase quality", () => {
+			it("by 1 when sell in is over 10 days", () => {
+				const backstagePasses = new Item(
+					"Backstage passes to a TAFKAL80ETC concert",
+					12,
+					1
+				);
+				const gildedRose = new GildedRose([backstagePasses]);
+
+				gildedRose.updateQuality();
+
+				const [updatedBackagePasses] = gildedRose.items;
+
+				expect(updatedBackagePasses.quality).toBe(2);
+			});
+
+			it("by 2 when sell in is between 6 and 10 days", () => {
+				const backstagePasses = new Item(
+					"Backstage passes to a TAFKAL80ETC concert",
+					11,
+					0
+				);
+				const gildedRose = new GildedRose([backstagePasses]);
+
+				gildedRose.updateQuality();
+
+				const [updatedBackagePasses] = gildedRose.items;
+
+				expect(updatedBackagePasses.quality).toBe(2);
+			});
+
+			it("by 3 when sell in is 5 days or less", () => {
+				const backstagePasses = new Item(
+					"Backstage passes to a TAFKAL80ETC concert",
+					6,
+					0
+				);
+				const gildedRose = new GildedRose([backstagePasses]);
+
+				gildedRose.updateQuality();
+
+				const [updatedBackagePasses] = gildedRose.items;
+
+				expect(updatedBackagePasses.quality).toBe(3);
+			});
+
+			it("up to the limit of 50", () => {
+				const backstagePasses = new Item(
+					"Backstage passes to a TAFKAL80ETC concert",
+					2,
+					50
+				);
+				const gildedRose = new GildedRose([backstagePasses]);
+
+				gildedRose.updateQuality();
+
+				const [updatedBackagePasses] = gildedRose.items;
+
+				expect(updatedBackagePasses.quality).toBe(50);
+			});
+		});
+
+		describe("should decrease quality", () => {
+			it("to 0 when sell in has passed (negative)", () => {
+				const backstagePasses = new Item(
+					"Backstage passes to a TAFKAL80ETC concert",
+					0,
+					50
+				);
+				const gildedRose = new GildedRose([backstagePasses]);
+
+				gildedRose.updateQuality();
+
+				const [updatedBackagePasses] = gildedRose.items;
+
+				expect(updatedBackagePasses.quality).toBe(0);
+			});
+		});
+
+		describe("should decrease sell in", () => {
+			it("by 1 when getting older", () => {
+				const backstagePasses = new Item(
+					"Backstage passes to a TAFKAL80ETC concert",
+					2,
+					3
+				);
+				const gildedRose = new GildedRose([backstagePasses]);
+
+				gildedRose.updateQuality();
+
+				const [updatedBackagePasses] = gildedRose.items;
+
+				expect(updatedBackagePasses.sellIn).toBe(1);
+			});
+		});
+	});
 });
