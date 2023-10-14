@@ -1,3 +1,4 @@
+// ** Do not touch due to Goblin
 export class Item {
 	name: string;
 	sellIn: number;
@@ -9,7 +10,66 @@ export class Item {
 		this.quality = quality;
 	}
 }
+// ** Do not touch due to Goblin ENDS
 
+// TODO: Sulfuras is said to be "Legendary, does this mean there might have more legendary items and this should be a class of its own?
+// TODO: Conjured similar to Sulfuras, it does sounds like it does has many items under it, not just the mana cake.
+// TODO: Aged Brie does increase in quality twice as fast when sell in has passed. Is this expected?
+
+// Constants
+export const ItemName = {
+	AgedBrie: "Aged Brie",
+	BackstagePasses: "Backstage passes to a TAFKAL80ETC concert",
+	Sulfuras: "Sulfuras, Hand of Ragnaros",
+	ConjuredManaCake: "Conjured Mana Cake",
+};
+interface GildedRoseItem {
+	update(): void;
+}
+
+class ItemFactory {
+	static createItem(
+		name: string,
+		sellIn: number,
+		quality: number
+	): GildedRoseItem {
+		switch (name) {
+			case ItemName.AgedBrie:
+				return new AgedBrie(name, sellIn, quality);
+			case ItemName.BackstagePasses:
+				return new BackstagePasses(name, sellIn, quality);
+			case ItemName.Sulfuras:
+				return new Sulfuras(name, sellIn, quality);
+			case ItemName.ConjuredManaCake:
+				return new Conjured(name, sellIn, quality);
+			default:
+				return new NormalItem(name, sellIn, quality);
+		}
+	}
+}
+
+// Items classes
+class AgedBrie extends Item {
+	update(): void {}
+}
+
+class BackstagePasses extends Item {
+	update(): void {}
+}
+
+class Sulfuras extends Item {
+	update(): void {}
+}
+
+class Conjured extends Item {
+	update(): void {}
+}
+
+class NormalItem extends Item {
+	update(): void {}
+}
+
+// Existing working code
 export class GildedRose {
 	items: Array<Item>;
 
