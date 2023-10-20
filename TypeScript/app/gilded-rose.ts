@@ -12,6 +12,22 @@ export class Item {
 }
 // ** Do not touch due to Goblin ENDS
 
+// Questions/Findings
+// TODO: Sulfuras is said to be "Legendary, does this mean there might have more legendary items and this should be a class of its own?
+// TODO: Conjured similar to Sulfuras, it does sounds like it does has many items under it, not just the mana cake.
+// TODO: Aged Brie does increase in quality twice as fast when sell in has passed. Is this expected?
+
+// Constants
+const MAX_QUALITY = 50;
+const MIN_QUALITY = 0;
+
+export const ItemName = {
+	AgedBrie: "Aged Brie",
+	BackstagePasses: "Backstage passes to a TAFKAL80ETC concert",
+	Sulfuras: "Sulfuras, Hand of Ragnaros",
+	ConjuredManaCake: "Conjured Mana Cake",
+};
+
 // Gilded Rose
 export class GildedRose {
 	items: Array<GildedRoseItem>;
@@ -27,22 +43,6 @@ export class GildedRose {
 			item.update();
 		}
 	}
-}
-
-// Questions/Findings
-// TODO: Sulfuras is said to be "Legendary, does this mean there might have more legendary items and this should be a class of its own?
-// TODO: Conjured similar to Sulfuras, it does sounds like it does has many items under it, not just the mana cake.
-// TODO: Aged Brie does increase in quality twice as fast when sell in has passed. Is this expected?
-
-// Constants
-export const ItemName = {
-	AgedBrie: "Aged Brie",
-	BackstagePasses: "Backstage passes to a TAFKAL80ETC concert",
-	Sulfuras: "Sulfuras, Hand of Ragnaros",
-	ConjuredManaCake: "Conjured Mana Cake",
-};
-interface GildedRoseItem extends Item {
-	update(): void;
 }
 
 class ItemFactory {
@@ -66,58 +66,73 @@ class ItemFactory {
 	}
 }
 
+abstract class GildedRoseItem extends Item {
+	abstract update(): void;
+
+	protected decrementSellIn() {
+		this.sellIn--;
+	}
+
+	protected adjustQuality(amount: number) {
+		this.quality = Math.min(
+			Math.max(this.quality + amount, MIN_QUALITY),
+			MAX_QUALITY
+		);
+	}
+}
+
 // Items classes
-class AgedBrie extends Item {
+class AgedBrie extends GildedRoseItem {
 	update(): void {
-		this.sellIn--;
-		this.quality = Math.min(this.quality + 1, 50);
+		this.decrementSellIn();
+		this.adjustQuality(1);
 
-		// TODO: review this compared to the existing logic, might not be expected
 		if (this.sellIn < 0) {
-			// Increase quality twice as fast when sellIn is negative
-			this.quality = Math.min(this.quality + 1, 50);
+			this.adjustQuality(1); // Increase quality twice as fast when sellIn is negative
 		}
 	}
 }
 
-class BackstagePasses extends Item {
+class BackstagePasses extends GildedRoseItem {
 	update(): void {
-		this.sellIn--;
+		this.decrementSellIn();
 
-		if (this.sellIn > 10) {
-			this.quality = Math.min(this.quality + 1, 50);
-		} else if (this.sellIn > 5 && this.sellIn <= 10) {
-			this.quality = Math.min(this.quality + 2, 50);
-		} else if (this.sellIn >= 0 && this.sellIn <= 5) {
-			this.quality = Math.min(this.quality + 3, 50);
-		} else {
+		if (this.sellIn < 0) {
 			this.quality = 0;
+		} else if (this.sellIn <= 5) {
+			this.adjustQuality(3);
+		} else if (this.sellIn <= 10) {
+			this.adjustQuality(2);
+		} else {
+			this.adjustQuality(1);
 		}
 	}
 }
 
-class NormalItem extends Item {
+class NormalItem extends GildedRoseItem {
 	update(): void {
-		this.sellIn--;
-		this.quality = Math.max(this.quality - 1, 0);
+		this.decrementSellIn();
+		this.adjustQuality(-1);
 
 		if (this.sellIn < 0) {
-			this.quality = Math.max(this.quality - 1, 0);
+			this.adjustQuality(-1);
 		}
 	}
 }
 
-class Sulfuras extends Item {
-	update(): void {}
+class Sulfuras extends GildedRoseItem {
+	update(): void {
+		// Sulfuras doesn't degrade in quality or sellIn
+	}
 }
 
-class Conjured extends Item {
+class Conjured extends GildedRoseItem {
 	update(): void {
-		this.sellIn--;
-		this.quality = Math.max(this.quality - 2, 0);
+		this.decrementSellIn();
+		this.adjustQuality(-2);
 
 		if (this.sellIn < 0) {
-			this.quality = Math.max(this.quality - 2, 0);
+			this.adjustQuality(-2);
 		}
 	}
 }
